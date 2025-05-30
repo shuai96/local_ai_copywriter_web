@@ -17,7 +17,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/generate': 'http://localhost:8000',
+      '/generate': {
+        target: 'https://local-ai-copywriter.onrender.com/ai/stream-generate',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/generate/, ''),
+      },
     },
   },
 })
